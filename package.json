@@ -1,7 +1,7 @@
 {
   "name": "wirecard-enterprise",
-  "version": "1.0.0",
-  "description": "Easily implement payment with the Wirecard Enterpise program.",
+  "version": "1.0.1",
+  "description": "Easily implement payments with the Wirecard Enterpise program.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
