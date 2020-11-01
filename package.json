@@ -17,6 +17,11 @@
   "author": "Libby Lebyane",
   "license": "MIT",
   "typings": "./types/index.d.ts",
+  "homepage": "https://github.com/lebyanelm/wirecard-enterprise.git",
+  "bugs": {
+    "url": "https://github.com/lebyanelm/wirecard-enterprise.git",
+    "email": "lebyanelm@nextify.co.za"
+  },
   "dependencies": {
     "@types/soap": "^0.21.0",
     "@types/xmlbuilder": "^11.0.1",
