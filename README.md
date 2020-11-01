@@ -135,4 +135,4 @@ wirecard.deleteToken(...options): Promise;
 # Why?
 When I got started with using Wirecard Enterprise to implement it to a project it took me a long while to do so, meant that project was slowed down because I needed to learn about it's implementation (with XML and SOAP) so hopefully this will help a fellow developer out there, since Wirecard Enterprise is a very powerful tool for online payments.
 
-For any bugs, issues or suggestions found you can send a pull request to the package's [GitHub homepage]().
+For any bugs, issues or suggestions found you can send a pull request to the package's [GitHub homepage](https://github.com/lebyanelm/wirecard-enterprise.git).
