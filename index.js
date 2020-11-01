@@ -50,12 +50,7 @@ WirecardEnterprise.prototype._send = async function (data, actionType, callback)
                     if (!response.errors) {
                         callback(null, response);
                     } else {
-                        // callback(response.errors.error[0].description);
-                        if (response.errors && response.errors.error && response.errors.error.length) {
-                            callback(response.errors.error[0].description);
-                        } else {
-                            callback('ERROR: UNEXPECTED ERROR HAS OCCURED.');
-                        }
+                        callback(response.errors[0].error[0].description, null);
                     }
                 } else {
                     callback('ERROR: REQUEST NOT FAILED BEFORE IT COULD BE COMPLETED.')
