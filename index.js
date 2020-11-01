@@ -166,19 +166,6 @@ WirecardEnterprise.prototype.tdsLookup = function(options = {}) {
     });
 }
 
-/** This message is used direct the card holder to their banks authentication page where they will validate the transaction using their secret password. */
-WirecardEnterprise.prototype.tdsAuthenticate = function(options = {}) {
-    return new Promise((resolve, reject) => {
-        this._send(options, 15, function (error, tdsAuthenticateResponse) {
-            if (!error) {
-                resolve(tdsAuthenticateResponse);
-            } else {
-                reject(error);
-            }
-        });
-    });
-}
-
 /** The Report request exposes console and internal database reporting via an API call and returns the data in an xml format. */
 WirecardEnterprise.prototype.reports = function(options = {}) {
     return new Promise((resolve, reject) => {
@@ -244,4 +231,4 @@ WirecardEnterprise.prototype.deleteToken = function(options = {}) {
     });
 }
 
-module.exports = { Transactions: WirecardEnterprise };
+module.exports = { WirecardEnterprise };

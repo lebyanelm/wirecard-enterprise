@@ -8,22 +8,22 @@ For the purposes of testing you can use the following credentials
 
 > Application ID: **3C5F80CB-F2DA-45D3-800D-A876E6258F17**
 
-> Test Card (Visa Non-3D)
+## Test Card (Visa Non-3D)
 
 | Visa (Succesful)       | Visa (Declined)   |
 | :------------- | :----------: |
 |  Joan Soap  | Joan Soap  |
 | 4111111111111111   | 4242424242424242 |
-| Any future data for expiry month and year
+| Any future date for rhe expiry month and year
 | Any 3/4 digit number for CVV Number
 
-> Test Card (Visa 3D-Enabled)
+## Test Card (Visa 3D-Enabled)
 
 | Visa (Succesful)       | Visa (Declined)   |
 | :------------- | :----------: |
 |  Joan Soap  | Joan Soap  |
 | 4000000000000002   | 5200000000000007 |
-| Any future data for expiry month and year
+| Any future date for the expiry month and year
 | Any 3/4 digit number for CVV Number
 
 **NB: Always be sure to use mode=0 for the purpose of testing when using live credentials**
@@ -32,16 +32,16 @@ When going live, these will need to be replaced by credentials issued to you by 
 
 For a more details explaination of the API check out the [offical API documentation](https://developers.wirecard.co.za/enterprise.php).
 
-# Installation
-### NPM
-> npm i wirecard-enterprise --save
-### YARN
-> yarn add wirecard-enterpise
 
 # Usage
 
 ```js
-const wirecard = require('wirecard-enterpise');
+const { WirecardEnterprise } = require('wirecard-enterpise'),
+      // You can use credentials given above for testing
+      credentials = {
+        merchantUID: 'YOUR WIRECARD MERCHANT ID',
+        applicationUID: 'YOUR WIRECARD APPLICATION ID'},
+      wirecard = new WirecardEnterprise(credentials);
 ```
 
 ## Authorise
@@ -134,3 +134,5 @@ wirecard.deleteToken(...options): Promise;
 
 # Why?
 When I got started with using Wirecard Enterprise to implement it to a project it took me a long while to do so, meant that project was slowed down because I needed to learn about it's implementation (with XML and SOAP) so hopefully this will help a fellow developer out there, since Wirecard Enterprise is a very powerful tool for online payments.
+
+For any bugs, issues or suggestions found you can send a pull request to the package's [GitHub homepage]().

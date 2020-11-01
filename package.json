@@ -1,7 +1,7 @@
 {
   "name": "wirecard-enterprise",
   "version": "1.0.0",
-  "description": "Wirecard package to utilize for a enterprise merchant with Node.js making it simple to intergrate in your existing code, removes complications of rewriting everything from scratch.",
+  "description": "Easily implement payment with the Wirecard Enterpise program.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,8 +14,9 @@
     "provider",
     "enterprise"
   ],
-  "author": "Libby Mohlokegi Lebyane",
+  "author": "Libby Lebyane",
   "license": "MIT",
+  "typings": "./types/index.d.ts",
   "dependencies": {
     "@types/soap": "^0.21.0",
     "@types/xmlbuilder": "^11.0.1",
