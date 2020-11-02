@@ -8,7 +8,7 @@ export class WirecardEnterprise {
     creditSale: (options: ICreditRequestOptions) => Promise<ICreditResponse | any>;
     capture: (options: ICaptureRequestOptions) => Promise<ICaptureResponse>;
     tdsLookup: (options: ITDSLookupRequestOptions) => Promise<ITDSLookupResponse>;
-    tdsAuthentication: (options: ITDSAuthenticateRequestOptions) => Promise<ITDSAuthenticateResponse>;
+    tdsAuthenticate: (options: ITDSAuthenticateRequestOptions) => Promise<ITDSAuthenticateResponse>;
     createToken: (options: ICreateTokenRequestOptions) => Promise<ITokenResponse>;
     readToken: (options: IReadTokenRequestOptions) => Promise<IReadTokenResponse>;
     updateToken: (options: IUpdateTokenRequestOptions) => Promise<ITokenResponse>;
