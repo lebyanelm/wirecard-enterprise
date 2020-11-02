@@ -12,7 +12,7 @@ let WirecardEnterprise = function(options = {}) {
     this._options = {
         MERCHANT_UID: options.merchantUID,
         APPLICATION_UID: options.applicationUID,
-        TERMINAL_ID: options.terminalID,
+        TERMINAL_ID: options.terminal,
         WSDL_URL: 'https://api.mygateglobal.com/api/?wsdl',
         MODE: options.mode || 0
     };
