@@ -2,6 +2,7 @@
 // Dependencies
 const soap = require('soap');
 const xmlbuilder = require('xmlbuilder');
+const xml2json = require('xml2js');
 
 // SOAP CLIENT OPTIONS
 const SOAP_CLIENT_OPTIONS = {
@@ -77,14 +78,25 @@ WirecardEnterprise.prototype._createSoapHeader = function (actionType) {
     return this._toXML(soapHeaderCredentials);
 }
 
-WirecardEnterprise.prototype._toXML = function (object = {}, options = {}) {
+WirecardEnterprise.prototype.toXML = function (object = {}, options = {}) {
     return xmlbuilder.create(object, { headless: true, ...options }).end({ pretty: true });
+}
+
+/** Used to convert an XML string to a normal JavaScript readable object. */
+WirecardEnterprise.prototype.toJSON = function (xmlString = '') {
+    return new Promise((resolve, reject) => {
+        xml2json.parseString(xmlString, (error, result) => {
+            if (error)
+                reject(error);
+            resolve(result);
+        })
+    })
 }
 
 /* The Authorise message creates a request to hold the requested amount and mark it as unavailable from the customer's card until it is either Captured or the hold terminates, thus rendering the amount available again */
 WirecardEnterprise.prototype.authorise = function (options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 1, function (error, authoriseResponse) {
+        this.send(options, 1, function (error, authoriseResponse) {
             if (!error) {
                 resolve(authoriseResponse);
             } else {
@@ -97,7 +109,7 @@ WirecardEnterprise.prototype.authorise = function (options = {}) {
 /* The Authorise – Reversal Message releases the hold that the Authorize placed on the customer's credit card funds. Use this service to reverse an unnecessary or undesired Authorisation. You can use full Authorise – Reversal only for an authorisation that has not been captured.*/
 WirecardEnterprise.prototype.authoriseReversal = function (options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 2, function (error, authoriseReversalResponse) {
+        this.send(options, 2, function (error, authoriseReversalResponse) {
             if (!error) {
                 resolve(authoriseReversalResponse);
             } else {
@@ -110,7 +122,7 @@ WirecardEnterprise.prototype.authoriseReversal = function (options = {}) {
 /* When you are ready to fulfil a customer's order, Capture the Authorisation for that order. */
 WirecardEnterprise.prototype.capture = function (options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 3, function(error, captureResponse) {
+        this.send(options, 3, function(error, captureResponse) {
             if (!error) {
                 resolve(captureResponse);
             } else {
@@ -123,7 +135,7 @@ WirecardEnterprise.prototype.capture = function (options = {}) {
 /* A sale is a bundled authorization and capture. You can use a Sale instead of a separate Authorise and Capture if there is no delay between taking a customer's order and shipping the goods. */
 WirecardEnterprise.prototype.sale = function (options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 5, function (error, saleResponse) {
+        this.send(options, 5, function (error, saleResponse) {
             if (!error) {
                 resolve(saleResponse);
             } else {
@@ -136,7 +148,7 @@ WirecardEnterprise.prototype.sale = function (options = {}) {
 /*  A Follow-On Credit is linked to a Capture in the system. You can request multiple Follow-On Credits against a single Capture. This action would reverse a Capture – Action 3. */
 WirecardEnterprise.prototype.creditCapture = function (options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 4, function (error, creditCapureResponse) {
+        this.send(options, 4, function (error, creditCapureResponse) {
             if (!error) {
                 resolve(creditCapureResponse);
             } else {
@@ -149,7 +161,7 @@ WirecardEnterprise.prototype.creditCapture = function (options = {}) {
 /* Credit Request messages are generated when a merchant wants to return the funds after  a transaction that has been captured (refund of a Sale - action 5). */
 WirecardEnterprise.prototype.creditSale = function (options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 12, function(error, creditSaleResponse) {
+        this.send(options, 12, function(error, creditSaleResponse) {
             if (!error) {
                 resolve(error);
             } else {
@@ -162,7 +174,7 @@ WirecardEnterprise.prototype.creditSale = function (options = {}) {
 /** This message is used to verify if the issuer and cardholder participates in 3D Secure program. */
 WirecardEnterprise.prototype.tdsLookup = function(options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 14, function (error, tdsLookupResponse) {
+        this.send(options, 14, function (error, tdsLookupResponse) {
             if (!error) {
                 resolve(tdsLookupResponse);
             } else {
@@ -174,7 +186,7 @@ WirecardEnterprise.prototype.tdsLookup = function(options = {}) {
 
 WirecardEnterprise.prototype.tdsAuthenticare = function(options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 15, function (error, tdsAuthenticateResponse) {
+        this.send(options, 15, function (error, tdsAuthenticateResponse) {
             if (!error) {
                 resolve(tdsAuthenticateResponse);
             } else {
@@ -187,7 +199,7 @@ WirecardEnterprise.prototype.tdsAuthenticare = function(options = {}) {
 /** The Report request exposes console and internal database reporting via an API call and returns the data in an xml format. */
 WirecardEnterprise.prototype.reports = function(options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 19, (error, reportsResponse) => {
+        this.send(options, 19, (error, reportsResponse) => {
             if (!error) {
                 resolve(reportsResponse);
             } else {
@@ -200,7 +212,7 @@ WirecardEnterprise.prototype.reports = function(options = {}) {
 /** This message is used when creating a token */
 WirecardEnterprise.prototype.createToken = function(options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 21, (error, createTokenResponse) => {
+        this.send(options, 21, (error, createTokenResponse) => {
             if (!error) {
                 resolve(createTokenResponse);
             } else {
@@ -213,7 +225,7 @@ WirecardEnterprise.prototype.createToken = function(options = {}) {
 /** This message is used when reading a token */
 WirecardEnterprise.prototype.readToken = function(options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 22, (error, readTokenResponse) => {
+        this.send(options, 22, (error, readTokenResponse) => {
             if (!error) {
                 resolve(readTokenResponse);
             } else {
@@ -226,7 +238,7 @@ WirecardEnterprise.prototype.readToken = function(options = {}) {
 /** This message is used when updating a token */
 WirecardEnterprise.prototype.updateToken = function(options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 24, (error, updateTokenResponse) => {
+        this.send(options, 24, (error, updateTokenResponse) => {
             if (!error) {
                 resolve(updateTokenResponse);
             } else {
@@ -239,7 +251,7 @@ WirecardEnterprise.prototype.updateToken = function(options = {}) {
 /** This message is used when deleting a token */
 WirecardEnterprise.prototype.deleteToken = function(options = {}) {
     return new Promise((resolve, reject) => {
-        this._send(options, 23, (error, deleteTokenResponse) => {
+        this.send(options, 23, (error, deleteTokenResponse) => {
             if (!error) {
                 resolve(deleteTokenResponse);
             } else {
