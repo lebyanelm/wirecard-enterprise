@@ -185,7 +185,7 @@ WirecardEnterprise.prototype.tdsLookup = function(options = {}) {
 }
 
 /** This message is used direct the card holder to their banks authentication page where they will validate the transaction using their secret password. */
-WirecardEnterprise.prototype.tdsAuthenticare = function(options = {}) {
+WirecardEnterprise.prototype.tdsAuthenticate = function(options = {}) {
     return new Promise((resolve, reject) => {
         this.send(options, 15, function (error, tdsAuthenticateResponse) {
             if (!error) {
