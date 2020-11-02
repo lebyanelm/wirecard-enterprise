@@ -44,7 +44,7 @@ WirecardEnterprise.prototype.send = async function (data, actionType, callback) 
             this.SOAP_CLIENT = await soap.createClientAsync(this._options.WSDL_URL, SOAP_CLIENT_OPTIONS);
         this.SOAP_CLIENT.addSoapHeader(this._createSoapHeader(actionType));
 
-        this.SOAP_CLIENT.execRequestPromise(this._toXML(data))
+        this.SOAP_CLIENT.execRequestPromise(this.toXML(data))
             .then((response) => {
                 response = response ? response[0] : undefined;
                 if (response) {
@@ -75,7 +75,7 @@ WirecardEnterprise.prototype._createSoapHeader = function (actionType) {
         actionTypeID: actionType
     }};
 
-    return this._toXML(soapHeaderCredentials);
+    return this.toXML(soapHeaderCredentials);
 }
 
 WirecardEnterprise.prototype.toXML = function (object = {}, options = {}) {
@@ -184,6 +184,7 @@ WirecardEnterprise.prototype.tdsLookup = function(options = {}) {
     });
 }
 
+/** This message is used direct the card holder to their banks authentication page where they will validate the transaction using their secret password. */
 WirecardEnterprise.prototype.tdsAuthenticare = function(options = {}) {
     return new Promise((resolve, reject) => {
         this.send(options, 15, function (error, tdsAuthenticateResponse) {
