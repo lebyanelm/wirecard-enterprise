@@ -31,7 +31,7 @@ WirecardEnterprise.prototype._send = async function (data, actionType, callback)
         }};
 
         let isAddTransactionMode = actionType === 1 || actionType === 14;
-        data.xmlField.mode = isAddTransactionMode ? this._options.MODE : undefined;
+        data.xmlField.mode = isAddTransactionMode ? (this._options.MODE || 1) : undefined;
 
         if (actionType === 21) {
             delete data.xmlField.terminal;
