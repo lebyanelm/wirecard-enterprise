@@ -14,7 +14,7 @@ let WirecardEnterprise = function(options = {}) {
         APPLICATION_UID: options.applicationUID,
         TERMINAL_ID: options.terminal,
         WSDL_URL: 'https://api.mygateglobal.com/api/?wsdl',
-        MODE: options.mode || 0
+        MODE: options.mode !== undefined ? options.mode : 0
     };
 
     if (!this._options.MERCHANT_UID)
@@ -32,7 +32,7 @@ WirecardEnterprise.prototype.send = async function (data, actionType, callback) 
         }};
 
         let isAddTransactionMode = actionType === 1 || actionType === 14;
-        data.xmlField.mode = isAddTransactionMode ? (this._options.MODE || 1) : undefined;
+        data.xmlField.mode = isAddTransactionMode ? this._options.MODE : undefined;
 
         if (actionType === 21) {
             delete data.xmlField.terminal;
