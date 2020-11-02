@@ -22,7 +22,7 @@ let WirecardEnterprise = function(options = {}) {
         throw Error('ERROR: APPLICATION ID NOT PROVIDED.');
 }
 
-WirecardEnterprise.prototype._send = async function (data, actionType, callback) {
+WirecardEnterprise.prototype.send = async function (data, actionType, callback) {
     if (data) {
         data = {xmlField: { 
             applicationUID: this._options.APPLICATION_UID,
