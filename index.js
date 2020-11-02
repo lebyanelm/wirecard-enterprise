@@ -50,7 +50,13 @@ WirecardEnterprise.prototype._send = async function (data, actionType, callback)
                     if (!response.errors) {
                         callback(null, response);
                     } else {
-                        callback(response.errors[0].error[0].description, null);
+                        if (response.errors.constructor === Object) {
+                            callback(response.errors.error[0].description);
+                        } else if (response.errors.constructor === Array) {
+                            callback(response.errors[0].error[0].description, null);
+                        } else {
+                            callback(response.errors);
+                        }
                     }
                 } else {
                     callback('ERROR: REQUEST NOT FAILED BEFORE IT COULD BE COMPLETED.')
