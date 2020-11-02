@@ -3,11 +3,12 @@ export class WirecardEnterprise {
 
     authorise: (options: IAuthoriseSaleRequestOptions) => Promise<IAuthoriseSaleResponse>;
     authoriseReversal: (options: IAuthoriseReversalRequestOptions) => Promise<any>;
-    sale: (options: IAuthoriseSaleResponse) => Promise<IAuthoriseSaleResponse>;
+    sale: (options: IAuthoriseSaleRequestOptions) => Promise<IAuthoriseSaleResponse>;
     creditCapture: (options: ICreditRequestOptions) => Promise<ICreditResponse | any>;
     creditSale: (options: ICreditRequestOptions) => Promise<ICreditResponse | any>;
     capture: (options: ICaptureRequestOptions) => Promise<ICaptureResponse>;
     tdsLookup: (options: ITDSLookupRequestOptions) => Promise<ITDSLookupResponse>;
+    tdsAuthentication: (options: ITDSAuthenticateRequestOptions) => Promise<ITDSAuthenticateResponse>;
     createToken: (options: ICreateTokenRequestOptions) => Promise<ITokenResponse>;
     readToken: (options: IReadTokenRequestOptions) => Promise<IReadTokenResponse>;
     updateToken: (options: IUpdateTokenRequestOptions) => Promise<ITokenResponse>;
@@ -174,6 +175,28 @@ export interface ITDSLookup {
 
 export interface ITDSLookupResponse extends IResponse {
     tdsLookup: ITDSLookup;
+}
+
+export interface ITDSAuthenticateRequestOptions extends IRequestOptions {
+    transactionAuth: ITransactionAuth;
+    merchantReference: string;
+}
+
+export interface ITDSAuthenticateResponse extends IResponse {
+    tdsAuth: {
+        code: string;
+        message: string;
+        description: string;
+        authRequired: string;
+        liabilityShift: string;
+        ccAuthAllowed: string;
+        eciFlag: string;
+        action: string;
+        paresStatus: string;
+        signatureVerification: string;
+        xid: string;
+        cavv: string;
+    }
 }
 
 export interface ICreateTokenRequestOptions extends IRequestOptions {
