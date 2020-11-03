@@ -26,7 +26,6 @@
     "@types/soap": "^0.21.0",
     "@types/xmlbuilder": "^11.0.1",
     "soap": "^0.34.0",
-    "stripe": "^8.119.0",
     "xml2js": "^0.4.23",
     "xmlbuilder": "^15.1.1"
   }
