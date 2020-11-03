@@ -135,6 +135,11 @@ export interface IFSPMessage {
 
 export interface IAuthoriseSaleResponse extends IResponse {
     fspMessage: IFSPMessage;
+    mgMessage?: {
+        cardCountry: string;
+        currencyCode: string;
+        eciFlag: string;
+    }
 }
 
 export interface IAuthoriseReversalRequestOptions extends IRequestOptions {
