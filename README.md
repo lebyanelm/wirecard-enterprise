@@ -30,7 +30,7 @@ For the purposes of testing you can use the following credentials
 
 When going live, these will need to be replaced by credentials issued to you by Wirecard.
 
-For a more details explaination of the API check out the [offical API documentation](https://developers.wirecard.co.za/enterprise.php).
+For a more detailed explaination of the API check out the [offical API documentation](https://developers.wirecard.co.za/enterprise.php).
 
 
 # Usage

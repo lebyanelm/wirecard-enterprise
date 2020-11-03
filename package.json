@@ -1,6 +1,6 @@
 {
   "name": "wirecard-enterprise",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Easily implement payments with the Wirecard Enterpise program.",
   "main": "index.js",
   "scripts": {
